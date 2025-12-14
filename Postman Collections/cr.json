@@ -1,0 +1,2175 @@
+{
+	"info": {
+		"_postman_id": "35151a29-9b6c-40dd-95ff-69873d9e8450",
+		"name": "crowd factoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login & Register Natural Person",
+			"item": [
+				{
+					"name": "Send  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "608498c1-b89f-47d6-81b2-5428ae8d29e6"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// تعداد رقم‌های بعد از 09\r",
+									"const digits = 9;\r",
+									"\r",
+									"// تابع برای تولید رقم رندوم\r",
+									"function getRandomDigit() {\r",
+									"    return Math.floor(Math.random() * 10); // عدد 0 تا 9\r",
+									"}\r",
+									"\r",
+									"// تولید شماره رندوم\r",
+									"let phoneNumber = '09';\r",
+									"for (let i = 0; i < digits; i++) {\r",
+									"    phoneNumber += getRandomDigit();\r",
+									"}\r",
+									"\r",
+									"// ذخیره در متغیر محیطی یا سراسری Postman\r",
+									"pm.environment.set(\"iranPhoneNumber\", phoneNumber);\r",
+									"\r",
+									"console.log(\"Generated Iran Phone Number:\", phoneNumber);\r",
+									"const otp = phoneNumber.slice(-6);\r",
+									"\r",
+									"// ذخیره OTP در محیط\r",
+									"pm.environment.set(\"otpCode\", otp);\r",
+									"\r",
+									"console.log(\"OTP (last 6 digits):\", otp);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "07e4e83f-c6eb-49fa-883c-af0691ae870f"
+							}
+						}
+					],
+					"id": "528685e2-64c0-46e2-aa69-e361e12fb84e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://193.5.44.235:3000"
+							},
+							{
+								"key": "Referer",
+								"value": "http://193.5.44.235:3000/"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "Application/json"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{iranPhoneNumber}}\",\r\n    \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/verification-code",
+						"description": "Generated from cURL: curl 'http://193.5.44.235:8080/api/auth/v1/verification-code' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Origin: http://193.5.44.235:3000' \\\r\n  -H 'Referer: http://193.5.44.235:3000/' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36' \\\r\n  -H 'accept: Application/json' \\\r\n  -H 'content-type: application/json' \\\r\n  --data-raw '{\"id\":\"09127988045\",\"code\":\"\"}' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Login  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن توکن\r",
+									"const token = response.token;\r",
+									"const userId1 = response.currentUser.user.id;\r",
+									"\r",
+									"// ذخیره در Environment یا Global\r",
+									"pm.environment.set(\"TokenUser\", token);\r",
+									"pm.environment.set(\"UserId\",userId1)\r",
+									"console.log(\"TokenUser:\", token);\r",
+									"console.log(\"UserID:\", userId1);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "2be926d5-a41d-4d70-9b77-434cd4f76c30"
+							}
+						}
+					],
+					"id": "dcc72ab6-7474-4932-af43-a8d994f4bca7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{iranPhoneNumber}}\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/login",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/api/auth/v1/login' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"09959120453\",\r\n  \"code\": \"156511577471838144343305659469994168276407888418135082156362505511422574555232557953956627044244190647096856079286235077879067313545650138227655248899784956520910786217659123497730640325\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register-verify national-code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "c3fda7d2-b78c-49b7-9b1b-5adb644e0732"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateValidIranNationalID() {\r",
+									"    // تولید 9 رقم اول (به جز اینکه همه ارقام نباید صفر باشند)\r",
+									"    let digits = \"\";\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        digits += Math.floor(Math.random() * 10);\r",
+									"    }\r",
+									"\r",
+									"    // جلوگیری از 000000000\r",
+									"    if (digits === \"000000000\") {\r",
+									"        digits = \"001234567\";\r",
+									"    }\r",
+									"\r",
+									"    // محاسبه رقم کنترل\r",
+									"    let sum = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        sum += parseInt(digits[i]) * (10 - i);\r",
+									"    }\r",
+									"\r",
+									"    const remainder = sum % 11;\r",
+									"    let checkDigit = 0;\r",
+									"\r",
+									"    if (remainder < 2) {\r",
+									"        checkDigit = remainder;\r",
+									"    } else {\r",
+									"        checkDigit = 11 - remainder;\r",
+									"    }\r",
+									"\r",
+									"    // کدملی کامل\r",
+									"    return digits + checkDigit.toString();\r",
+									"}\r",
+									"\r",
+									"// تولید و ذخیره در Environment\r",
+									"const nationalID = generateValidIranNationalID();\r",
+									"\r",
+									"pm.environment.set(\"iranNationalID\", nationalID);\r",
+									"\r",
+									"console.log(\"Generated Valid Iranian National ID:\", nationalID);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "10804cae-df6a-4365-affa-262264ef8ccc"
+							}
+						}
+					],
+					"id": "74fadb51-6950-4655-8952-b7602f9d0e5f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Proxy-Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6W10sImlzcyI6Imh0dHBzOi8vY3Jvd2QtbmVzdC5pciIsImlkIjoicXowRzkiLCJleHAiOjE3NjUwMDA1OTYsImlhdCI6MTc2NDkxMDU5Nn0.bvy2uA5-SnsJK9RRqlEr5aAonKN6iabVzrrxQMQf0vs",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nationalCode\": \"{{iranNationalID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/users/v1/verify/national-code",
+						"description": "Generated from cURL: curl -X 'PATCH' \\\r\n  'http://193.5.44.235:8080/users/v1/verify/national-code' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nationalCode\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register-verify birth-date",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function getRandomBirthDate() {\r",
+									"    // بازه سن: 18 تا 60 سال\r",
+									"    const currentYear = 2025;\r",
+									"    const minYear = currentYear - 60; // 1965\r",
+									"    const maxYear = currentYear - 18; // 2007\r",
+									"\r",
+									"    // سال رندوم\r",
+									"    const year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;\r",
+									"\r",
+									"    // ماه رندوم 1 تا 12\r",
+									"    const month = Math.floor(Math.random() * 12) + 1;\r",
+									"\r",
+									"    // تعداد روزهای ماه\r",
+									"    const daysInMonth = new Date(year, month, 0).getDate();\r",
+									"\r",
+									"    // روز رندوم\r",
+									"    const day = Math.floor(Math.random() * daysInMonth) + 1;\r",
+									"\r",
+									"    // فرمت YYYY-MM-DD\r",
+									"    const birthDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;\r",
+									"\r",
+									"    return birthDate;\r",
+									"}\r",
+									"\r",
+									"// ساخت تاریخ تولد\r",
+									"const randomBirthDate = getRandomBirthDate();\r",
+									"\r",
+									"// ذخیره در Environment\r",
+									"pm.environment.set(\"randomBirthDate\", randomBirthDate);\r",
+									"\r",
+									"console.log(\"Generated Birth Date:\", randomBirthDate);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "9fd2707f-0a2f-4890-a20c-57ff432058fc"
+							}
+						}
+					],
+					"id": "f881dc19-5b18-46fc-be61-bf68635f14a3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthDate\": \"{{randomBirthDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/users/v1/verify/birth-date",
+						"description": "Generated from cURL: curl -X 'PATCH' \\\r\n  'http://193.5.44.235:8080/users/v1/verify/birth-date' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"birthDate\": \"2025-12-05\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register sheba",
+					"id": "d0c3f8f4-63f1-4de4-b5c1-08d03e666664",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"{{UserId}}\",\r\n  \"companyId\": \"\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://193.5.44.235:8080/sheba/v1",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/sheba/v1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userId\": \"string\",\r\n  \"companyId\": \"string\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Assert info User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// گرفتن مقادیر از وریبل‌ها\r",
+									"const expectedNationalCode = pm.environment.get(\"iranNationalID\");\r",
+									"const expectedBirthDate = pm.environment.get(\"randomBirthDate\");\r",
+									"\r",
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن مقادیر از پاسخ\r",
+									"const actualNationalCode = response.user.nationalCode;\r",
+									"const actualBirthDate = response.user.birthDate;\r",
+									"\r",
+									"// مقایسه و تست\r",
+									"pm.test(\"National Code matches the expected value\", function () {\r",
+									"    pm.expect(actualNationalCode).to.eql(expectedNationalCode);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Birth Date matches the expected value\", function () {\r",
+									"    pm.expect(actualBirthDate).to.eql(expectedBirthDate);\r",
+									"});\r",
+									"\r",
+									"// نمایش در کنسول\r",
+									"console.log(\"Expected National Code:\", expectedNationalCode, \"| Actual:\", actualNationalCode);\r",
+									"console.log(\"Expected Birth Date:\", expectedBirthDate, \"| Actual:\", actualBirthDate);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "d93a6e31-9511-4f9c-ab8e-463d10e078b1"
+							}
+						}
+					],
+					"id": "0d7f6013-9a06-4a86-83e9-638b17fa79c2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/users/v1/current-user",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/users/v1/current-user' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				}
+			],
+			"id": "0618c564-797b-4ae5-ae84-934af44694d7"
+		},
+		{
+			"name": "Login & Register  Legal Entiy",
+			"item": [
+				{
+					"name": "Send  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "9e03fdd2-3903-4bb2-9254-bfbcb30427bb"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// تعداد رقم‌های بعد از 09\r",
+									"const digits = 9;\r",
+									"\r",
+									"// تابع برای تولید رقم رندوم\r",
+									"function getRandomDigit() {\r",
+									"    return Math.floor(Math.random() * 10); // عدد 0 تا 9\r",
+									"}\r",
+									"\r",
+									"// تولید شماره رندوم\r",
+									"let phoneNumber = '09';\r",
+									"for (let i = 0; i < digits; i++) {\r",
+									"    phoneNumber += getRandomDigit();\r",
+									"}\r",
+									"\r",
+									"// ذخیره در متغیر محیطی یا سراسری Postman\r",
+									"pm.environment.set(\"iranPhoneNumber\", phoneNumber);\r",
+									"\r",
+									"console.log(\"Generated Iran Phone Number:\", phoneNumber);\r",
+									"const otp = phoneNumber.slice(-6);\r",
+									"\r",
+									"// ذخیره OTP در محیط\r",
+									"pm.environment.set(\"otpCode\", otp);\r",
+									"\r",
+									"console.log(\"OTP (last 6 digits):\", otp);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "479be240-daa9-4feb-b0c4-c1c556250bca"
+							}
+						}
+					],
+					"id": "c756ac30-ddb4-41c6-a057-c182df68b84b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://193.5.44.235:3000"
+							},
+							{
+								"key": "Referer",
+								"value": "http://193.5.44.235:3000/"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "Application/json"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{iranPhoneNumber}}\",\r\n    \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/verification-code",
+						"description": "Generated from cURL: curl 'http://193.5.44.235:8080/api/auth/v1/verification-code' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Origin: http://193.5.44.235:3000' \\\r\n  -H 'Referer: http://193.5.44.235:3000/' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36' \\\r\n  -H 'accept: Application/json' \\\r\n  -H 'content-type: application/json' \\\r\n  --data-raw '{\"id\":\"09127988045\",\"code\":\"\"}' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Login  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن توکن\r",
+									"const token = response.token;\r",
+									"const userId1 = response.currentUser.user.id;\r",
+									"const companyid=response.currentUser.person.id;\r",
+									"// ذخیره در Environment یا Global\r",
+									"pm.environment.set(\"TokenUser\", token);\r",
+									"pm.environment.set(\"UserId\",userId1);\r",
+									"pm.environment.set(\"CompanyId\", companyid);\r",
+									"console.log(\"TokenUser:\", token);\r",
+									"console.log(\"UserID:\", userId1);\r",
+									"console.log(\"CompanyID:\", companyid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "c0b355db-f9ab-4c3d-a354-477e7fb4f0c7"
+							}
+						}
+					],
+					"id": "1e819f8a-7797-46a2-91c9-c5c9d7796105",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{iranPhoneNumber}}\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/login",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/api/auth/v1/login' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"09959120453\",\r\n  \"code\": \"156511577471838144343305659469994168276407888418135082156362505511422574555232557953956627044244190647096856079286235077879067313545650138227655248899784956520910786217659123497730640325\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register-verify national-code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "a95d658a-19d8-41d6-a60f-650a37fae969"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateValidIranNationalID() {\r",
+									"    // تولید 9 رقم اول (به جز اینکه همه ارقام نباید صفر باشند)\r",
+									"    let digits = \"\";\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        digits += Math.floor(Math.random() * 10);\r",
+									"    }\r",
+									"\r",
+									"    // جلوگیری از 000000000\r",
+									"    if (digits === \"000000000\") {\r",
+									"        digits = \"001234567\";\r",
+									"    }\r",
+									"\r",
+									"    // محاسبه رقم کنترل\r",
+									"    let sum = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        sum += parseInt(digits[i]) * (10 - i);\r",
+									"    }\r",
+									"\r",
+									"    const remainder = sum % 11;\r",
+									"    let checkDigit = 0;\r",
+									"\r",
+									"    if (remainder < 2) {\r",
+									"        checkDigit = remainder;\r",
+									"    } else {\r",
+									"        checkDigit = 11 - remainder;\r",
+									"    }\r",
+									"\r",
+									"    // کدملی کامل\r",
+									"    return digits + checkDigit.toString();\r",
+									"}\r",
+									"\r",
+									"// تولید و ذخیره در Environment\r",
+									"const nationalID = generateValidIranNationalID();\r",
+									"\r",
+									"pm.environment.set(\"iranNationalID\", nationalID);\r",
+									"\r",
+									"console.log(\"Generated Valid Iranian National ID:\", nationalID);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "20e37afb-afd2-432d-9e7f-ff461a8a66b3"
+							}
+						}
+					],
+					"id": "f6bdca52-7c34-45e1-a4e6-9874bc2f7ebb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Proxy-Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6W10sImlzcyI6Imh0dHBzOi8vY3Jvd2QtbmVzdC5pciIsImlkIjoicXowRzkiLCJleHAiOjE3NjUwMDA1OTYsImlhdCI6MTc2NDkxMDU5Nn0.bvy2uA5-SnsJK9RRqlEr5aAonKN6iabVzrrxQMQf0vs",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nationalCode\": \"{{iranNationalID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/users/v1/verify/national-code",
+						"description": "Generated from cURL: curl -X 'PATCH' \\\r\n  'http://193.5.44.235:8080/users/v1/verify/national-code' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nationalCode\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register-verify birth-date",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function getRandomBirthDate() {\r",
+									"    // بازه سن: 18 تا 60 سال\r",
+									"    const currentYear = 2025;\r",
+									"    const minYear = currentYear - 60; // 1965\r",
+									"    const maxYear = currentYear - 18; // 2007\r",
+									"\r",
+									"    // سال رندوم\r",
+									"    const year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;\r",
+									"\r",
+									"    // ماه رندوم 1 تا 12\r",
+									"    const month = Math.floor(Math.random() * 12) + 1;\r",
+									"\r",
+									"    // تعداد روزهای ماه\r",
+									"    const daysInMonth = new Date(year, month, 0).getDate();\r",
+									"\r",
+									"    // روز رندوم\r",
+									"    const day = Math.floor(Math.random() * daysInMonth) + 1;\r",
+									"\r",
+									"    // فرمت YYYY-MM-DD\r",
+									"    const birthDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;\r",
+									"\r",
+									"    return birthDate;\r",
+									"}\r",
+									"\r",
+									"// ساخت تاریخ تولد\r",
+									"const randomBirthDate = getRandomBirthDate();\r",
+									"\r",
+									"// ذخیره در Environment\r",
+									"pm.environment.set(\"randomBirthDate\", randomBirthDate);\r",
+									"\r",
+									"console.log(\"Generated Birth Date:\", randomBirthDate);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "26163abf-afe1-45c4-84f2-9c7cea4b77b8"
+							}
+						}
+					],
+					"id": "47e74243-10df-4ec3-91cf-672f2b4ce6f3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthDate\": \"{{randomBirthDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/users/v1/verify/birth-date",
+						"description": "Generated from cURL: curl -X 'PATCH' \\\r\n  'http://193.5.44.235:8080/users/v1/verify/birth-date' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"birthDate\": \"2025-12-05\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "persons/v1/legal-person/1",
+					"id": "3c185535-acc8-48ee-8366-6198f2a5555e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/persons/v1/legal-person/{{CompanyId}}",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/persons/v1/legal-person/1' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+					},
+					"response": []
+				},
+				{
+					"name": "companies/v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8991fad-5886-472d-b9ac-b3a606dfb9d2",
+								"exec": [
+									"const responseBody = pm.response.json(); // Parse the response body as JSON\r",
+									"\r",
+									"\r",
+									"pm.expect(responseBody.id).to.not.be.null; // Check if the 'id' field is not null\r",
+									"\r",
+									"pm.environment.set(\"CompanyId\", responseBody.id); // Set the 'CompanyName' environment variable to the 'name' field of the response\r",
+									"console.log(\"comapny id:\" ,responseBody.id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "2051e8fd-1250-460c-bd21-06f6a47fcded",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{CompanyId}}\",\r\n  \"nationalId\": \"10260201004\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/companies/v1",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"string\",\r\n  \"name\": \"string\",\r\n  \"previewName\": \"string\",\r\n  \"registrationNumber\": \"string\",\r\n  \"nationalId\": \"20508966293\",\r\n  \"metadata\": {\r\n    \"knowledgeBased\": true,\r\n    \"knowledgeBasedType\": \"STARTUP\",\r\n    \"companyType\": \"PRIVATE_JOINT_STOCK\",\r\n    \"mail\": \"string\",\r\n    \"website\": \"string\",\r\n    \"contactName\": \"string\",\r\n    \"contactPhone\": \"78245393637061144117003432564858772925823178868033918020164395892620122720758651901243380455\",\r\n    \"address\": \"string\",\r\n    \"fieldOfActivity\": \"string\",\r\n    \"establishmentDate\": \"string\",\r\n    \"initialCapital\": 0,\r\n    \"currentCapital\": 0\r\n  },\r\n  \"logoKey\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register sheba",
+					"id": "6b44bee8-ea3f-4959-934c-0322e3ff8d00",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"{{UserId}}\",\r\n  \"companyId\": \"{{CompanyId}}\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://193.5.44.235:8080/sheba/v1",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/sheba/v1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userId\": \"string\",\r\n  \"companyId\": \"string\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Assert info User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// گرفتن مقادیر از وریبل‌ها\r",
+									"const expectedNationalCode = pm.environment.get(\"iranNationalID\");\r",
+									"const expectedBirthDate = pm.environment.get(\"randomBirthDate\");\r",
+									"\r",
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن مقادیر از پاسخ\r",
+									"const actualNationalCode = response.user.nationalCode;\r",
+									"const actualBirthDate = response.user.birthDate;\r",
+									"\r",
+									"// مقایسه و تست\r",
+									"pm.test(\"National Code matches the expected value\", function () {\r",
+									"    pm.expect(actualNationalCode).to.eql(expectedNationalCode);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Birth Date matches the expected value\", function () {\r",
+									"    pm.expect(actualBirthDate).to.eql(expectedBirthDate);\r",
+									"});\r",
+									"\r",
+									"// نمایش در کنسول\r",
+									"console.log(\"Expected National Code:\", expectedNationalCode, \"| Actual:\", actualNationalCode);\r",
+									"console.log(\"Expected Birth Date:\", expectedBirthDate, \"| Actual:\", actualBirthDate);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "de0f946d-0c05-473d-91a6-4d59bccb281b"
+							}
+						}
+					],
+					"id": "72c91211-67d5-435f-b4a6-fd116a972a3e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/users/v1/current-user",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/users/v1/current-user' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				}
+			],
+			"id": "24477167-25d9-4317-bb0d-a0be4b187177"
+		},
+		{
+			"name": "Add Companies",
+			"item": [
+				{
+					"name": "Send  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "0fe4d7b0-5f60-49e1-938e-883c14975f89"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// تعداد رقم‌های بعد از 09\r",
+									"const digits = 9;\r",
+									"\r",
+									"// تابع برای تولید رقم رندوم\r",
+									"function getRandomDigit() {\r",
+									"    return Math.floor(Math.random() * 10); // عدد 0 تا 9\r",
+									"}\r",
+									"\r",
+									"// تولید شماره رندوم\r",
+									"let phoneNumber = '09';\r",
+									"for (let i = 0; i < digits; i++) {\r",
+									"    phoneNumber += getRandomDigit();\r",
+									"}\r",
+									"\r",
+									"// ذخیره در متغیر محیطی یا سراسری Postman\r",
+									"pm.environment.set(\"iranPhoneNumber\", phoneNumber);\r",
+									"\r",
+									"console.log(\"Generated Iran Phone Number:\", phoneNumber);\r",
+									"const otp = phoneNumber.slice(-6);\r",
+									"\r",
+									"// ذخیره OTP در محیط\r",
+									"pm.environment.set(\"otpCode\", otp);\r",
+									"\r",
+									"console.log(\"OTP (last 6 digits):\", otp);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "f0b4929c-1e62-4af9-975d-5e4fe092064b"
+							}
+						}
+					],
+					"id": "75261286-1abe-49b2-93a6-b9be9e509f94",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://193.5.44.235:3000"
+							},
+							{
+								"key": "Referer",
+								"value": "http://193.5.44.235:3000/"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "Application/json"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{iranPhoneNumber}}\",\r\n    \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/verification-code",
+						"description": "Generated from cURL: curl 'http://193.5.44.235:8080/api/auth/v1/verification-code' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Origin: http://193.5.44.235:3000' \\\r\n  -H 'Referer: http://193.5.44.235:3000/' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36' \\\r\n  -H 'accept: Application/json' \\\r\n  -H 'content-type: application/json' \\\r\n  --data-raw '{\"id\":\"09127988045\",\"code\":\"\"}' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Login  mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "708fd76c-4547-4fd8-a23b-7391d5b27c00",
+								"exec": [
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن توکن\r",
+									"const token = response.token;\r",
+									"const userId1 = response.currentUser.user.id;\r",
+									"const companyid=response.currentUser.person.id;\r",
+									"// ذخیره در Environment یا Global\r",
+									"pm.environment.set(\"TokenUser\", token);\r",
+									"pm.environment.set(\"UserId\",userId1);\r",
+									"pm.environment.set(\"CompanyId\", companyid);\r",
+									"console.log(\"TokenUser:\", token);\r",
+									"console.log(\"UserID:\", userId1);\r",
+									"console.log(\"CompanyID:\", companyid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "c7d7e62c-b706-49cb-9a49-ab946ee0f44b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{iranPhoneNumber}}\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/api/auth/v1/login",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/api/auth/v1/login' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"09959120453\",\r\n  \"code\": \"156511577471838144343305659469994168276407888418135082156362505511422574555232557953956627044244190647096856079286235077879067313545650138227655248899784956520910786217659123497730640325\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies-info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea4551a4-9dfa-493f-a2d5-00e2da148c26",
+								"exec": [
+									"const  json = pm.response.json();\r",
+									"pm.environment.set(\"CompanyId\",json.id);\r",
+									"console.log(\"Comapny ID is set to: \" + json.id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4341a408-9881-4beb-9457-82fda8eb4fab",
+								"exec": [
+									"function generateNationalCompanyId() {\r",
+									"    // تولید 10 رقم اول به صورت رندوم\r",
+									"    let digits = [];\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        digits.push(Math.floor(Math.random() * 10));\r",
+									"    }\r",
+									"\r",
+									"    // محاسبه رقم کنترلی (رقم 11)\r",
+									"    let sum = 0;\r",
+									"    for (let i = 0; i < 10; i++) {\r",
+									"        sum += digits[i] * (10 - i);\r",
+									"    }\r",
+									"\r",
+									"    let remainder = sum % 11;\r",
+									"    let controlDigit = remainder < 2 ? remainder : 11 - remainder;\r",
+									"\r",
+									"    digits.push(controlDigit);\r",
+									"\r",
+									"    return digits.join('');\r",
+									"}\r",
+									"\r",
+									"// تولید شناسه ملی\r",
+									"let nationalCompanyId = generateNationalCompanyId();\r",
+									"\r",
+									"// ذخیره در وریبل\r",
+									"pm.environment.set(\"NationalId\", nationalCompanyId);\r",
+									"\r",
+									"// لاگ برای تست\r",
+									"console.log(\"National Company ID:\", nationalCompanyId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "f4d94898-2608-4ee6-969f-2cb83fb9e84e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Techno Vision Group\",\r\n  \"previewName\": \"TechnoVision\",\r\n  \"registrationNumber\": \"584123\",\r\n  \"nationalId\": \"{{NationalId}}\",\r\n  \"metadata\": {\r\n    \"knowledgeBased\": true,\r\n    \"knowledgeBasedType\": \"STARTUP\",\r\n    \"companyType\": \"PRIVATE_JOINT_STOCK\",\r\n    \"mail\": \"info@technovision.co\",\r\n    \"website\": \"https://www.technovision.co\",\r\n    \"contactName\": \"Arman Vahidi\",\r\n    \"contactPhone\": \"09124567891\",\r\n    \"address\": \"Tehran, Valiasr Street, No. 245\",\r\n    \"fieldOfActivity\": \"Software Development and AI Solutions\",\r\n    \"establishmentDate\": \"2018-07-12\",\r\n    \"initialCapital\": 500000000,\r\n    \"currentCapital\": 1250000000\r\n  },\r\n  \"logoKey\": \"logos/technovision_9834.png\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/companies/v1",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"string\",\r\n  \"name\": \"string\",\r\n  \"previewName\": \"string\",\r\n  \"registrationNumber\": \"string\",\r\n  \"nationalId\": \"95409468067\",\r\n  \"metadata\": {\r\n    \"knowledgeBased\": true,\r\n    \"knowledgeBasedType\": \"STARTUP\",\r\n    \"companyType\": \"PRIVATE_JOINT_STOCK\",\r\n    \"mail\": \"string\",\r\n    \"website\": \"string\",\r\n    \"contactName\": \"string\",\r\n    \"contactPhone\": \"741753305356857550665553831660738\",\r\n    \"address\": \"string\",\r\n    \"fieldOfActivity\": \"string\",\r\n    \"establishmentDate\": \"string\",\r\n    \"initialCapital\": 0,\r\n    \"currentCapital\": 0\r\n  },\r\n  \"logoKey\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get  info companies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48b6de8b-5590-4966-94be-d356e65b63a8",
+								"exec": [
+									"const targetId = pm.environment.get(\"CompanyId\");\r",
+									"const expectedNationalId = pm.environment.get(\"NationalId\");\r",
+									"const res = pm.response.json();\r",
+									"// پیدا کردن آیتم با id موردنظر\r",
+									"const item = res.find(i => i.id === targetId);\r",
+									"\r",
+									"// تست وجود آیتم\r",
+									"pm.test(\"ID exists in response\", () => {\r",
+									"    pm.expect(item).to.exist;\r",
+									"});\r",
+									"\r",
+									"// تست nationalId\r",
+									"pm.test(\"nationalId matches expected\", () => {\r",
+									"    pm.expect(item.nationalId).to.equal(expectedNationalId);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "4ef73216-4b5d-4c19-ae68-60deab07648e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/companies/v1' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies next-state Info",
+					"id": "2581c334-392f-4989-b8b8-ce4a28823052",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/next-state",
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://193.5.44.235:8080/companies/v1/w/next-state' \\\r\n  -H 'accept: */*' \\"
+					},
+					"response": []
+				},
+				{
+					"name": "companies stake-holders 3",
+					"id": "e7e3a6fa-0976-4c66-897d-3bd2a901eac5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"documentFile\": \"temp_files/181bf7f0914215e69ee79dcd79868550c8205087eb725faf27b259b62ee6a507.jpg\",\r\n  \"sharePercent\": 0,\r\n  \"type\": \"REAL\",\r\n  \"name\": \"{{randomLastName}}\",\r\n  \"nationalId\": \"{{iranNationalID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/companies/v1/{{CompanyId}}/stake-holders",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"companies",
+								"v1",
+								"{{CompanyId}}",
+								"stake-holders"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/stake-holders' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"documentFile\": \"string\",\r\n  \"sharePercent\": 0,\r\n  \"type\": \"REAL\",\r\n  \"name\": \"string\",\r\n  \"nationalId\": \"40279694530\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies stake-holders 3",
+					"id": "f6256fcb-7aca-4f9e-ac3d-593b65f4ac2e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/stake-holders",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/companies/v1/q/stake-holders' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies next-state Info",
+					"id": "7029e5bd-dfb3-47f1-ab02-110ef1f678f7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/next-state",
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://193.5.44.235:8080/companies/v1/w/next-state' \\\r\n  -H 'accept: */*' \\"
+					},
+					"response": []
+				},
+				{
+					"name": "upload files",
+					"id": "dd427b66-5153-49f3-82a1-c65635f52f8e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"type": "file",
+									"contentType": "image/jpeg",
+									"key": "file",
+									"src": "/C:/Users/WALLEX/OneDrive/Pictures/team lead.jpg"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"uuid": "3f70b813-ce0a-4503-b526-cd65ab37d90d",
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://193.5.44.235:8080/files/v1/upload",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/files/v1/upload' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: multipart/form-data' \\\r\n  -F 'file=@133848760355444704.jpg;type=image/jpeg'"
+					},
+					"response": []
+				},
+				{
+					"name": "Add managers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "88da0ee5-d3fe-4c52-91e1-06a629c4cbb7",
+								"exec": [
+									"function generateValidIranNationalID() {\r",
+									"    // تولید 9 رقم اول (به جز اینکه همه ارقام نباید صفر باشند)\r",
+									"    let digits = \"\";\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        digits += Math.floor(Math.random() * 10);\r",
+									"    }\r",
+									"\r",
+									"    // جلوگیری از 000000000\r",
+									"    if (digits === \"000000000\") {\r",
+									"        digits = \"001234567\";\r",
+									"    }\r",
+									"\r",
+									"    // محاسبه رقم کنترل\r",
+									"    let sum = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        sum += parseInt(digits[i]) * (10 - i);\r",
+									"    }\r",
+									"\r",
+									"    const remainder = sum % 11;\r",
+									"    let checkDigit = 0;\r",
+									"\r",
+									"    if (remainder < 2) {\r",
+									"        checkDigit = remainder;\r",
+									"    } else {\r",
+									"        checkDigit = 11 - remainder;\r",
+									"    }\r",
+									"\r",
+									"    // کدملی کامل\r",
+									"    return digits + checkDigit.toString();\r",
+									"}\r",
+									"\r",
+									"// تولید و ذخیره در Environment\r",
+									"const nationalID = generateValidIranNationalID();\r",
+									"\r",
+									"pm.environment.set(\"iranNationalID\", nationalID);\r",
+									"\r",
+									"console.log(\"Generated Valid Iranian National ID:\", nationalID);\r",
+									"\r",
+									"const firstNames = [\r",
+									"  \"احمد\", \"پارسا\", \"علی\", \"سامان\", \"آرین\", \"سهیل\", \"مهدی\", \"آرمان\", \"دانیال\", \"نیما\",\r",
+									"  \"زهرا\", \"مریم\", \"نگار\", \"یلدا\", \"آتنا\", \"ریحانه\", \"نسرین\", \"مهسا\", \"ستاره\", \"کیمیا\"\r",
+									"];\r",
+									"\r",
+									"const lastNames = [\r",
+									"  \"مرادی\", \"محمدی\", \"کریمی\", \"حسینی\", \"موسوی\", \"احمدی\", \"رضایی\", \"جعفری\",\r",
+									"  \"سازگار\", \"پارسامهر\", \"کاظمی\", \"خسروی\", \"قاسمی\", \"اکبری\"\r",
+									"];\r",
+									"\r",
+									"// انتخاب تصادفی\r",
+									"const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"\r",
+									"// ست کردن در وریبل‌های Postman\r",
+									"pm.environment.set(\"randomFirstName\", randomFirstName);\r",
+									"pm.environment.set(\"randomLastName\", randomLastName);\r",
+									"\r",
+									"// لاگ\r",
+									"console.log(\"Generated Name:\", randomFirstName, randomLastName);\r",
+									"// شروع شماره با 09\r",
+									"let phone = \"09\";\r",
+									"\r",
+									"// 9 رقم رندوم باقی‌مانده\r",
+									"for (let i = 0; i < 9; i++) {\r",
+									"    phone += Math.floor(Math.random() * 10);\r",
+									"}\r",
+									"\r",
+									"// ذخیره در متغیر\r",
+									"pm.environment.set(\"randomPhone\", phone);\r",
+									"\r",
+									"// لاگ\r",
+									"console.log(\"Generated Phone:\", phone);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "33c4eaa9-906d-417e-a977-ed8bc63e2f66",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"{{randomFirstName}} {{randomLastName}}\",\r\n  \"managerType\": \"CEO\",\r\n  \"nationalCode\": \"{{iranNationalID}}\",\r\n  \"documentFile\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/managers",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1/2/managers' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6W10sImlzcyI6Imh0dHBzOi8vY3Jvd2QtbmVzdC5pciIsImlkIjoib2xLZXoiLCJleHAiOjE3NjU2NTc3MjQsImlhdCI6MTc2NTU2NzcyNH0.YeocG-9HeimMJd8rK-pKW32I_jZuV3cA92HipTtmH7c' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"fullName\": \"string\",\r\n  \"managerType\": \"CEO\",\r\n  \"nationalCode\": \"string\",\r\n  \"documentFile\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get managers",
+					"id": "e083c0cb-185d-4bd7-afb6-e91ead19c093",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/managers",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/managers' \\\r\n  -H 'accept: */*' \\"
+					},
+					"response": []
+				},
+				{
+					"name": "companies next-state managers",
+					"id": "dd802249-b870-4d28-9892-2e3b965158da",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/next-state",
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://193.5.44.235:8080/companies/v1/w/next-state' \\\r\n  -H 'accept: */*' \\"
+					},
+					"response": []
+				},
+				{
+					"name": "save companies agents 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "646c5f64-d8cd-41eb-867e-b1c3b27b1aaf",
+								"exec": [
+									"function generateValidIranNationalID() {\r",
+									"    // تولید 9 رقم اول (به جز اینکه همه ارقام نباید صفر باشند)\r",
+									"    let digits = \"\";\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        digits += Math.floor(Math.random() * 10);\r",
+									"    }\r",
+									"\r",
+									"    // جلوگیری از 000000000\r",
+									"    if (digits === \"000000000\") {\r",
+									"        digits = \"001234567\";\r",
+									"    }\r",
+									"\r",
+									"    // محاسبه رقم کنترل\r",
+									"    let sum = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        sum += parseInt(digits[i]) * (10 - i);\r",
+									"    }\r",
+									"\r",
+									"    const remainder = sum % 11;\r",
+									"    let checkDigit = 0;\r",
+									"\r",
+									"    if (remainder < 2) {\r",
+									"        checkDigit = remainder;\r",
+									"    } else {\r",
+									"        checkDigit = 11 - remainder;\r",
+									"    }\r",
+									"\r",
+									"    // کدملی کامل\r",
+									"    return digits + checkDigit.toString();\r",
+									"}\r",
+									"\r",
+									"// تولید و ذخیره در Environment\r",
+									"const nationalID = generateValidIranNationalID();\r",
+									"\r",
+									"pm.environment.set(\"iranNationalID\", nationalID);\r",
+									"\r",
+									"console.log(\"Generated Valid Iranian National ID:\", nationalID);\r",
+									"\r",
+									"const firstNames = [\r",
+									"  \"احمد\", \"پارسا\", \"علی\", \"سامان\", \"آرین\", \"سهیل\", \"مهدی\", \"آرمان\", \"دانیال\", \"نیما\",\r",
+									"  \"زهرا\", \"مریم\", \"نگار\", \"یلدا\", \"آتنا\", \"ریحانه\", \"نسرین\", \"مهسا\", \"ستاره\", \"کیمیا\"\r",
+									"];\r",
+									"\r",
+									"const lastNames = [\r",
+									"  \"مرادی\", \"محمدی\", \"کریمی\", \"حسینی\", \"موسوی\", \"احمدی\", \"رضایی\", \"جعفری\",\r",
+									"  \"سازگار\", \"پارسامهر\", \"کاظمی\", \"خسروی\", \"قاسمی\", \"اکبری\"\r",
+									"];\r",
+									"\r",
+									"// انتخاب تصادفی\r",
+									"const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"\r",
+									"// ست کردن در وریبل‌های Postman\r",
+									"pm.environment.set(\"randomFirstName\", randomFirstName);\r",
+									"pm.environment.set(\"randomLastName\", randomLastName);\r",
+									"\r",
+									"// لاگ\r",
+									"console.log(\"Generated Name:\", randomFirstName, randomLastName);\r",
+									"// شروع شماره با 09\r",
+									"let phone = \"09\";\r",
+									"\r",
+									"// 9 رقم رندوم باقی‌مانده\r",
+									"for (let i = 0; i < 9; i++) {\r",
+									"    phone += Math.floor(Math.random() * 10);\r",
+									"}\r",
+									"\r",
+									"// ذخیره در متغیر\r",
+									"pm.environment.set(\"randomPhone\", phone);\r",
+									"\r",
+									"// لاگ\r",
+									"console.log(\"Generated Phone:\", phone);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "f6ec7475-84b4-46d1-9e1e-155f505616a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6W10sImlzcyI6Imh0dHBzOi8vY3Jvd2QtbmVzdC5pciIsImlkIjoib2xLZXoiLCJleHAiOjE3NjU2NTc3MjQsImlhdCI6MTc2NTU2NzcyNH0.YeocG-9HeimMJd8rK-pKW32I_jZuV3cA92HipTtmH7c",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"1\",\r\n  \"phone\": \"{{randomPhone}}\",\r\n  \"birthDate\": \"{{randomBirthDate}}\",\r\n  \"nationalCode\": \"{{iranNationalID}}\",\r\n  \"firstName\": \"{{randomFirstName}}\",\r\n  \"lastName\": \"{{randomLastName}}\",\r\n  \"verificationState\": \"PENDING_NATIONAL_CODE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/agents",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/agents' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"string\",\r\n  \"phone\": \"09322110062\",\r\n  \"birthDate\": \"2025-12-06\",\r\n  \"nationalCode\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"verificationState\": \"PENDING_NATIONAL_CODE\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies agents-2",
+					"id": "cc953eb6-f966-4ab9-9b62-d3eb1537fe4d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/{{CompanyId}}/agents",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/agents' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies next-state 2",
+					"id": "1936faf0-6de9-4e49-99bf-a2ed90900392",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "http://193.5.44.235:8080/companies/v1/{{CompanyId}}/next-state",
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/next-state' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies managers-4",
+					"id": "7a8ea1c7-6059-4448-b49f-85b19d2a3cdb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/companies/v1/1/managers",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/managers' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies managers 4",
+					"id": "4d8757a1-5dcd-4d79-976f-35370907f61a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"string\",\r\n  \"managerType\": \"CEO\",\r\n  \"nationalCode\": \"string\",\r\n  \"documentFile\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/companies/v1/1/managers",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/companies/v1/1/managers' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"fullName\": \"string\",\r\n  \"managerType\": \"CEO\",\r\n  \"nationalCode\": \"string\",\r\n  \"documentFile\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "upload file",
+					"id": "d42c16d6-cbc7-4205-844c-20d9f2862d91",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"contentType": "image/png",
+									"type": "file",
+									"src": "9.png"
+								}
+							]
+						},
+						"url": "{{BaseUrl}}/files/v1/upload",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/files/v1/upload' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: multipart/form-data' \\\r\n  -F 'file=@9.png;type=image/png'"
+					},
+					"response": []
+				},
+				{
+					"name": "companies  managers newspaper-4",
+					"id": "a9b0f1ab-c514-46d4-8b9c-a256ad84bef5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"newspaperFile\": \"string\",\r\n  \"managers\": [\r\n    {\r\n      \"fullName\": \"string\",\r\n      \"managerType\": \"CEO\",\r\n      \"nationalCode\": \"string\",\r\n      \"documentFile\": \"string\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://193.5.44.235:8080/companies/v1/12/managers/newspaper",
+						"description": "Generated from cURL: curl -X 'PATCH' \\\r\n  'http://193.5.44.235:8080/companies/v1/12/managers/newspaper' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"newspaperFile\": \"string\",\r\n  \"managers\": [\r\n    {\r\n      \"fullName\": \"string\",\r\n      \"managerType\": \"CEO\",\r\n      \"nationalCode\": \"string\",\r\n      \"documentFile\": \"string\"\r\n    }\r\n  ]\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "financial-statement5",
+					"id": "96270178-7adb-435e-9586-58d41628257a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/financial-statement/v1/12",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/financial-statement/v1/12' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "Post financial-statement5",
+					"id": "3ad72a1a-18ff-4367-9dea-608b94db82a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"string\",\r\n  \"operatingRevenue\": 0,\r\n  \"operatingProfit\": 0,\r\n  \"retainedEarnings\": 0,\r\n  \"totalCurrentAssets\": 0,\r\n  \"totalNonCurrentAssets\": 0,\r\n  \"totalCurrentLiabilities\": 0,\r\n  \"totalNonCurrentLiabilities\": 0,\r\n  \"totalEquity\": 0,\r\n  \"year\": 0,\r\n  \"documentFile\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrl}}/financial-statement/v1/12",
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/financial-statement/v1/12' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": \"string\",\r\n  \"operatingRevenue\": 0,\r\n  \"operatingProfit\": 0,\r\n  \"retainedEarnings\": 0,\r\n  \"totalCurrentAssets\": 0,\r\n  \"totalNonCurrentAssets\": 0,\r\n  \"totalCurrentLiabilities\": 0,\r\n  \"totalNonCurrentLiabilities\": 0,\r\n  \"totalEquity\": 0,\r\n  \"year\": 0,\r\n  \"documentFile\": \"string\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Register sheba6",
+					"id": "26bed558-1fb3-4086-8d9e-7e9e388ced6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"string\",\r\n  \"companyId\": \"string\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://193.5.44.235:8080/sheba/v1",
+							"protocol": "http",
+							"host": [
+								"193",
+								"5",
+								"44",
+								"235"
+							],
+							"port": "8080",
+							"path": [
+								"sheba",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://193.5.44.235:8080/sheba/v1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userId\": \"string\",\r\n  \"companyId\": \"string\",\r\n  \"sheba\": \"044896466244760598421646\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Assert info User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// گرفتن مقادیر از وریبل‌ها\r",
+									"const expectedNationalCode = pm.environment.get(\"iranNationalID\");\r",
+									"const expectedBirthDate = pm.environment.get(\"randomBirthDate\");\r",
+									"\r",
+									"// گرفتن پاسخ JSON\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// گرفتن مقادیر از پاسخ\r",
+									"const actualNationalCode = response.user.nationalCode;\r",
+									"const actualBirthDate = response.user.birthDate;\r",
+									"\r",
+									"// مقایسه و تست\r",
+									"pm.test(\"National Code matches the expected value\", function () {\r",
+									"    pm.expect(actualNationalCode).to.eql(expectedNationalCode);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Birth Date matches the expected value\", function () {\r",
+									"    pm.expect(actualBirthDate).to.eql(expectedBirthDate);\r",
+									"});\r",
+									"\r",
+									"// نمایش در کنسول\r",
+									"console.log(\"Expected National Code:\", expectedNationalCode, \"| Actual:\", actualNationalCode);\r",
+									"console.log(\"Expected Birth Date:\", expectedBirthDate, \"| Actual:\", actualBirthDate);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"id": "6117d3f1-333d-4d4e-9598-22488a58562a"
+							}
+						}
+					],
+					"id": "63c86474-1722-42f2-8d40-2cb780bb1605",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TokenUser}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrl}}/users/v1/current-user",
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://193.5.44.235:8080/users/v1/current-user' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				}
+			],
+			"id": "00caee3c-6707-4c12-8758-7b4b4fb0d375"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				],
+				"id": "96e774a9-2eea-453b-8484-d84c836328a9"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				],
+				"id": "e501d448-25a2-4847-a889-01d526b4f2c5"
+			}
+		}
+	]
+}
