@@ -2144,6 +2144,57 @@
 				}
 			],
 			"id": "00caee3c-6707-4c12-8758-7b4b4fb0d375"
+		},
+		{
+			"name": "http://193.5.44.235:8080/v1/admin/projects",
+			"id": "14f51510-f1b4-4a89-90c6-c7ef2e9c55f1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "http://193.5.44.235:3000"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Referer",
+						"value": "http://193.5.44.235:3000/"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "accept",
+						"value": "Application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6WyJBRE1JTiJdLCJpc3MiOiJodHRwczovL2Nyb3dkLW5lc3QuaXIiLCJpZCI6IjFrYjM5IiwiZXhwIjoxNzY2NTk3MzUxLCJpYXQiOjE3NjY1MDczNTF9.BHp7fPP5dw65qLgYY57jF2Q5YZp3t207RLmIS_6JYKY"
+					}
+				],
+				"url": "http://193.5.44.235:8080/v1/admin/projects",
+				"description": "Generated from cURL: curl --location 'http://193.5.44.235:8080/v1/admin/projects' \\\r\n--header 'Accept-Language: en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6' \\\r\n--header 'Cache-Control: no-cache' \\\r\n--header 'Connection: keep-alive' \\\r\n--header 'Origin: http://193.5.44.235:3000' \\\r\n--header 'Pragma: no-cache' \\\r\n--header 'Referer: http://193.5.44.235:3000/' \\\r\n--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \\\r\n--header 'accept: Application/json' \\\r\n--header 'authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6WyJBRE1JTiJdLCJpc3MiOiJodHRwczovL2Nyb3dkLW5lc3QuaXIiLCJpZCI6IjFrYjM5IiwiZXhwIjoxNzY2NTk3MzUxLCJpYXQiOjE3NjY1MDczNTF9.BHp7fPP5dw65qLgYY57jF2Q5YZp3t207RLmIS_6JYKY'"
+			},
+			"response": []
 		}
 	],
 	"event": [
