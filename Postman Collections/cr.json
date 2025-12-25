@@ -2195,6 +2195,57 @@
 				"description": "Generated from cURL: curl --location 'http://193.5.44.235:8080/v1/admin/projects' \\\r\n--header 'Accept-Language: en-GB,en;q=0.9,fa-IR;q=0.8,fa;q=0.7,en-US;q=0.6' \\\r\n--header 'Cache-Control: no-cache' \\\r\n--header 'Connection: keep-alive' \\\r\n--header 'Origin: http://193.5.44.235:3000' \\\r\n--header 'Pragma: no-cache' \\\r\n--header 'Referer: http://193.5.44.235:3000/' \\\r\n--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \\\r\n--header 'accept: Application/json' \\\r\n--header 'authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0IjoibG9naW4iLCJyb2xlcyI6WyJBRE1JTiJdLCJpc3MiOiJodHRwczovL2Nyb3dkLW5lc3QuaXIiLCJpZCI6IjFrYjM5IiwiZXhwIjoxNzY2NTk3MzUxLCJpYXQiOjE3NjY1MDczNTF9.BHp7fPP5dw65qLgYY57jF2Q5YZp3t207RLmIS_6JYKY'"
 			},
 			"response": []
+		},
+		{
+			"name": "http://193.5.44.235:3000/api/auth/session",
+			"id": "cc2b0dee-e377-4342-b6aa-bcc30add3782",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Referer",
+						"value": "http://193.5.44.235:3000/business/companies/kgBBo/agent-info"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "Cookie",
+						"value": "next-auth.csrf-token=4a76f0ac2d55139d9305773836ac626541c63e1e05cc0a918446fa65f418fd95%7C92009ddad0af3a4c732f6da4b6889f39367e54832cecac20689b716cdb5fc9dd; reduxPersistIndex=[%22persist:auth%22]; next-auth.callback-url=http%3A%2F%2F193.5.44.235%3A3000%2Fauth%2Fvarify%3Fmobile%3D09127988405; persist%3Aauth={%22_persist%22:%22{%5C%22version%5C%22:-1%2C%5C%22rehydrated%5C%22:true}%22%2C%22currentUser%22:%22{%5C%22user%5C%22:{%5C%22id%5C%22:%5C%226oQ5o%5C%22%2C%5C%22phone%5C%22:%5C%2209127988405%5C%22%2C%5C%22birthDate%5C%22:%5C%222007-02-01%5C%22%2C%5C%22nationalCode%5C%22:%5C%220440053153%5C%22%2C%5C%22verificationState%5C%22:%5C%22VERIFIED%5C%22}%2C%5C%22person%5C%22:{%5C%22id%5C%22:%5C%221kb39%5C%22%2C%5C%22type%5C%22:%5C%22REAL%5C%22%2C%5C%22userDto%5C%22:{%5C%22id%5C%22:%5C%226oQ5o%5C%22%2C%5C%22phone%5C%22:%5C%2209127988405%5C%22%2C%5C%22birthDate%5C%22:%5C%222007-02-01%5C%22%2C%5C%22nationalCode%5C%22:%5C%220440053153%5C%22%2C%5C%22verificationState%5C%22:%5C%22VERIFIED%5C%22}}}%22}; next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..a8J0x6Hl_VEmEf1s.U6tTkM2EzZ0JlO0xxCOHKPGyXgJwtpmL0UgcatcYKZgpZVm5BUPDxu6FuAeBRYdU7NnTVQhgn_bEnZIYQECBJZZOqC8b6FC9uO3Ehe_zzj9hrM3Ps9FmiJXN0zmg5uQzqP2cOAmdG29vu2X_kXhqVYkI2OVd61thNxeCAxtkHlyKaePDiXnRH6kyZVtVL-AAz8o5UAI7MxT6iMRsa2WnacPu-bNBlTAbo2KuhRtWNZ8TUb2Gr3Dbbj6xPa28b_BliPShTXsJFJMsbPWBWDgsveZs2UasmB5Oj-XTgNkqRQfzK9327jsU665UMMK4ESs1elE9Jh5AvBz12-ft80wu3LPMf2L6vwHfM1Ph9uA1-mAjigyp2HUBvxxTN0xDi58C3nEv_hyR60nSVw___GGXchHsXokvNKEq3_-jnUBnA0XYBJ2NfKHZ6MhYNzg45jlkM8DtuOcUpsleXpkvNSa3sjP654E3nrLX3MQkxxF6z0p86_bpScmqGGTl_VshNUzjEx3JCxpQ5vcsz2hFRqzQ_DyPBwBXaoHPdOJxB9QNartVh3O-waxFlGJ27lgVpl3204l4neL7q5VLOh7gew_9Fn5eJSeAiB1J-WJsxxTKtcDTO2Zp3xsXLSccBAYnmm__46RvIJzH5iL12pF52HoK-bQbE70p4lypvZMnMwOl_31PicuZBLyTydh_LfUUofk4HhaEfHg5nHP5ntGMfAXue1C804IIf0WwsjuiDR3_aR8FiPgkQ8UAthS0mxtWBKPWR9LoLYzv1Vv9UvDV0l_dZZ3hJIS15e_ancCNyRZIpRvgt3BDI3uVVjVTdMAgj9toYq4tVq5qswuWIEX7kSrGIAjLXC5UQPZLt8UMK05C1Vgd9Dh7Xgs2ZzOJl2Be86btEMNKzbE-pxktfkEaqMqkZ7TtPdf0OoSG8ukH1aLNSCws78_WAKgtwR4TasiZM0BV1pAFDMk1z3ASxKHxUiLJH4d0kHi_FxPU7jxK3bZN5-Usr0QPmHtlvQMG8HusEhrHJTncrnJhlU0inj8qtVrwxzU.WH1wlgW8PuX97Q8AV9hVRg; _dd_s=logs=1&id=2cc680ad-c7be-49ce-a477-81a13031fac9&created=1766673788838&expire=1766676305837"
+					}
+				],
+				"url": "http://193.5.44.235:3000/api/auth/session",
+				"description": "Generated from cURL: curl 'http://193.5.44.235:3000/api/auth/session' \\\r\n  -H 'Accept: */*' \\\r\n  -H 'Accept-Language: en-US,en;q=0.9' \\\r\n  -H 'Cache-Control: no-cache' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -b 'next-auth.csrf-token=4a76f0ac2d55139d9305773836ac626541c63e1e05cc0a918446fa65f418fd95%7C92009ddad0af3a4c732f6da4b6889f39367e54832cecac20689b716cdb5fc9dd; reduxPersistIndex=[%22persist:auth%22]; next-auth.callback-url=http%3A%2F%2F193.5.44.235%3A3000%2Fauth%2Fvarify%3Fmobile%3D09127988405; persist%3Aauth={%22_persist%22:%22{%5C%22version%5C%22:-1%2C%5C%22rehydrated%5C%22:true}%22%2C%22currentUser%22:%22{%5C%22user%5C%22:{%5C%22id%5C%22:%5C%226oQ5o%5C%22%2C%5C%22phone%5C%22:%5C%2209127988405%5C%22%2C%5C%22birthDate%5C%22:%5C%222007-02-01%5C%22%2C%5C%22nationalCode%5C%22:%5C%220440053153%5C%22%2C%5C%22verificationState%5C%22:%5C%22VERIFIED%5C%22}%2C%5C%22person%5C%22:{%5C%22id%5C%22:%5C%221kb39%5C%22%2C%5C%22type%5C%22:%5C%22REAL%5C%22%2C%5C%22userDto%5C%22:{%5C%22id%5C%22:%5C%226oQ5o%5C%22%2C%5C%22phone%5C%22:%5C%2209127988405%5C%22%2C%5C%22birthDate%5C%22:%5C%222007-02-01%5C%22%2C%5C%22nationalCode%5C%22:%5C%220440053153%5C%22%2C%5C%22verificationState%5C%22:%5C%22VERIFIED%5C%22}}}%22}; next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..a8J0x6Hl_VEmEf1s.U6tTkM2EzZ0JlO0xxCOHKPGyXgJwtpmL0UgcatcYKZgpZVm5BUPDxu6FuAeBRYdU7NnTVQhgn_bEnZIYQECBJZZOqC8b6FC9uO3Ehe_zzj9hrM3Ps9FmiJXN0zmg5uQzqP2cOAmdG29vu2X_kXhqVYkI2OVd61thNxeCAxtkHlyKaePDiXnRH6kyZVtVL-AAz8o5UAI7MxT6iMRsa2WnacPu-bNBlTAbo2KuhRtWNZ8TUb2Gr3Dbbj6xPa28b_BliPShTXsJFJMsbPWBWDgsveZs2UasmB5Oj-XTgNkqRQfzK9327jsU665UMMK4ESs1elE9Jh5AvBz12-ft80wu3LPMf2L6vwHfM1Ph9uA1-mAjigyp2HUBvxxTN0xDi58C3nEv_hyR60nSVw___GGXchHsXokvNKEq3_-jnUBnA0XYBJ2NfKHZ6MhYNzg45jlkM8DtuOcUpsleXpkvNSa3sjP654E3nrLX3MQkxxF6z0p86_bpScmqGGTl_VshNUzjEx3JCxpQ5vcsz2hFRqzQ_DyPBwBXaoHPdOJxB9QNartVh3O-waxFlGJ27lgVpl3204l4neL7q5VLOh7gew_9Fn5eJSeAiB1J-WJsxxTKtcDTO2Zp3xsXLSccBAYnmm__46RvIJzH5iL12pF52HoK-bQbE70p4lypvZMnMwOl_31PicuZBLyTydh_LfUUofk4HhaEfHg5nHP5ntGMfAXue1C804IIf0WwsjuiDR3_aR8FiPgkQ8UAthS0mxtWBKPWR9LoLYzv1Vv9UvDV0l_dZZ3hJIS15e_ancCNyRZIpRvgt3BDI3uVVjVTdMAgj9toYq4tVq5qswuWIEX7kSrGIAjLXC5UQPZLt8UMK05C1Vgd9Dh7Xgs2ZzOJl2Be86btEMNKzbE-pxktfkEaqMqkZ7TtPdf0OoSG8ukH1aLNSCws78_WAKgtwR4TasiZM0BV1pAFDMk1z3ASxKHxUiLJH4d0kHi_FxPU7jxK3bZN5-Usr0QPmHtlvQMG8HusEhrHJTncrnJhlU0inj8qtVrwxzU.WH1wlgW8PuX97Q8AV9hVRg; _dd_s=logs=1&id=2cc680ad-c7be-49ce-a477-81a13031fac9&created=1766673788838&expire=1766676305837' \\\r\n  -H 'Pragma: no-cache' \\\r\n  -H 'Referer: http://193.5.44.235:3000/business/companies/kgBBo/agent-info' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \\\r\n  --insecure"
+			},
+			"response": []
 		}
 	],
 	"event": [
