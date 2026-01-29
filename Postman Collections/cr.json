@@ -1157,7 +1157,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"09127988405\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
+							"raw": "{\r\n  \"id\": \"09127988405\",\r\n  \"code\": \"9888405\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
