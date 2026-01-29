@@ -1009,6 +1009,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "0fe4d7b0-5f60-49e1-938e-883c14975f89",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
@@ -1019,13 +1020,13 @@
 								],
 								"type": "text/javascript",
 								"packages": {},
-								"requests": {},
-								"id": "0fe4d7b0-5f60-49e1-938e-883c14975f89"
+								"requests": {}
 							}
 						},
 						{
 							"listen": "prerequest",
 							"script": {
+								"id": "f0b4929c-1e62-4af9-975d-5e4fe092064b",
 								"exec": [
 									"// تعداد رقم‌های بعد از 09\r",
 									"const digits = 9;\r",
@@ -1054,8 +1055,7 @@
 								],
 								"type": "text/javascript",
 								"packages": {},
-								"requests": {},
-								"id": "f0b4929c-1e62-4af9-975d-5e4fe092064b"
+								"requests": {}
 							}
 						}
 					],
@@ -1097,7 +1097,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"{{iranPhoneNumber}}\",\r\n    \"code\": \"{{otpCode}}\"\r\n}",
+							"raw": "{\r\n    \"id\": \"09127988405\",\r\n    \"code\": \"{{otpCode}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1157,7 +1157,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"{{iranPhoneNumber}}\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
+							"raw": "{\r\n  \"id\": \"09127988405\",\r\n  \"code\": \"{{otpCode}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
